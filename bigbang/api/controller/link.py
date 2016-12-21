@@ -1,7 +1,7 @@
 import pecan
 
-from bigbang.api.controllers import base
-from bigbang.api.controllers import types
+from bigbang.api.controller import base
+from bigbang.api.controller import types
 
 
 def build_url(resource, resource_args, bookmark=False, base_url=None):

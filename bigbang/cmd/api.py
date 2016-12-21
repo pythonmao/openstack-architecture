@@ -19,7 +19,7 @@ def main():
     workers = CONF.api.workers
     application = app.setup()
 
-    service = wsgi.service(CONF, 'bigbang', application, host, ip)
+    service = wsgi.Server(CONF, 'bigbang', application, host, port)
     app.serve(service, CONF, workers)
 
     app.wait()

@@ -5,11 +5,11 @@ from oslo_log import log as logging
 LOG = logging.getLogger(__name__)
 
 api_opts = [
-    cfg.Stropt('bind_host', default='0.0.0.0',
+    cfg.StrOpt('bind_host', default='0.0.0.0',
                help=("api server ip")),
     cfg.IntOpt('bind_port', default='8080',
                help=("port")),
-    cfg.Intopt('api_workers', default=2,
+    cfg.IntOpt('workers', default=1,
                help=("the number of workers"))
 ]
 
@@ -26,5 +26,5 @@ def init(args, **kwargs):
 def setup_logging():
     product_name = 'bigbang'
     logging.setup(cfg.CONF, product_name)
-    logging.info('logging enable!')
-    logging.debug('command line %s', " ".join(sys.argv))
+    LOG.info('logging enable!')
+    LOG.debug('command line %s', " ".join(sys.argv))

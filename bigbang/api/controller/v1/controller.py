@@ -2,9 +2,9 @@ from pecan import expose
 from pecan import route
 from pecan import request
 
-from bigbang.api.controllers import base
-from bigbang.api.controllers import link
-from bigbang.api.controllers import types
+from bigbang.api.controller import base
+from bigbang.api.controller import link
+from bigbang.api.controller import types
 
 from bigbang.api.controller.v1 import person as v1person
 from bigbang.api.controller.v1 import book as v1book

@@ -23,8 +23,9 @@ class Version(base.APIBase):
         version = Version()
         version.id = id
         version.link = [link.Link.make_link('self', request.host_url,
-                                       id, bookmark=True)]
+                                            id, '', bookmark=True)]
         return version
+
 
 class Root(base.APIBase):
     fields = {
@@ -50,6 +51,7 @@ class Root(base.APIBase):
         root.versions = [Version.convert('v1')]
         root.default_version = Version.convert('v1')
         return root
+
 
 class RootController(object):
     @expose('json')
