@@ -64,7 +64,7 @@ class RPCHook(hooks.PecanHook):
     """Attach the rpcapi object to the request so controllers can get to it."""
 
     def before(self, state):
-        state.request.rpcapi = bigbang_api.API(context=state.request.context, topic='bigbang-controller')
+        state.request.rpcapi = bigbang_api.API(context=state.request.context)
 
 
 class NoExceptionTracebackHook(hooks.PecanHook):
