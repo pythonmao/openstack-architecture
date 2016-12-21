@@ -22,7 +22,7 @@ def init(args, **kwargs):
     logging.register_options(cfg.CONF)
 
     cfg.CONF(args=args, project='bigbang', **kwargs)
-    rpc.init()
+    rpc.init(cfg.CONF)
 
 
 def setup_logging():

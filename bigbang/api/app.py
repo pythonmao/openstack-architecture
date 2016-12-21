@@ -2,6 +2,7 @@ from oslo_service import service
 from oslo_config import cfg
 from pecan import configuration
 from pecan import make_app
+from bigbang.api import hooks
 
 _launcher = None
 
@@ -23,11 +24,15 @@ def setup():
     }
 
     pecan_config = configuration.conf_from_dict(config)
+    app_hooks = [
+        hooks.ContextHook(),
+        hooks.NoExceptionTracebackHook(),
+        hooks.RPCHook(),
+    ]
 
-    # app_hooks = None
     app = make_app(
         pecan_config.app.root,
-        # hooks=app_hooks,
+        hooks=app_hooks,
         force_canonical=False,
         log=getattr(config, 'logging', {})
     )

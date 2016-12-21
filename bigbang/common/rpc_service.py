@@ -64,7 +64,7 @@ class API(object):
     def __init__(self, transport=None, context=None, topic=None, server=None,
                  timeout=None):
         serializer = rpc.RequestContextSerializer(
-            objects_base.ZunObjectSerializer())
+            objects_base.BigbangObjectSerializer())
         if transport is None:
             exmods = rpc.get_allowed_exmods()
             transport = messaging.get_transport(CONF,

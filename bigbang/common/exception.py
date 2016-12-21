@@ -25,7 +25,6 @@ import sys
 from webob import util as woutil
 
 from keystoneclient import exceptions as keystone_exceptions
-from oslo_config import cfg
 from oslo_log import log as logging
 from oslo_utils import excutils
 import pecan
