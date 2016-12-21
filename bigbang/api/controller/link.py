@@ -40,10 +40,3 @@ class Link(base.APIBase):
             return Link(href=href, rel=rel_name)
         else:
             return Link(href=href, rel=rel_name, type=type)
-
-    @classmethod
-    def sample(cls):
-        sample = cls(href="http://localhost:8080/containers/"
-                          "eaaca217-e7d8-47b4-bb41-3f99f20eed89",
-                     rel="bookmark")
-        return sample
