@@ -1,6 +1,7 @@
 import sys
 from oslo_config import cfg
 from oslo_log import log as logging
+from bigbang.common import rpc
 
 LOG = logging.getLogger(__name__)
 
@@ -21,6 +22,7 @@ def init(args, **kwargs):
     logging.register_options(cfg.CONF)
 
     cfg.CONF(args=args, project='bigbang', **kwargs)
+    rpc.init()
 
 
 def setup_logging():

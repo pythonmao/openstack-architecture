@@ -20,13 +20,13 @@ from oslo_log import log
 from oslo_service import service
 from oslo_service import wsgi
 
-from zun.api import app
-from zun.common import config
-from zun.common import exception
-from zun.common.i18n import _
-import zun.conf
+from bigbang.api import app
+from bigbang.common import config
+from bigbang.common import exception
+from bigbang.common.i18n import _
+from oslo_config import cfg
 
-CONF = zun.conf.CONF
+CONF = cfg.CONF
 LOG = log.getLogger(__name__)
 
 
@@ -36,7 +36,7 @@ def prepare_service(argv=None):
     log.register_options(CONF)
     config.parse_args(argv)
     config.set_config_defaults()
-    log.setup(CONF, 'zun')
+    log.setup(CONF, 'bigbang')
     # TODO(yuanying): Uncomment after objects are implemented
     # objects.register_all()
 

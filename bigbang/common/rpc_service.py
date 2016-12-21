@@ -17,11 +17,10 @@
 import eventlet
 import oslo_messaging as messaging
 from oslo_service import service
+from oslo_config import cfg
 
-from zun.common import rpc
-import zun.conf
-from zun.objects import base as objects_base
-from zun.servicegroup import zun_service_periodic as servicegroup
+from bigbang.common import rpc
+from bigbang.objects import base as objects_base
 
 # NOTE(paulczar):
 # Ubuntu 14.04 forces librabbitmq when kombu is used
@@ -30,7 +29,7 @@ from zun.servicegroup import zun_service_periodic as servicegroup
 # to use libamqp instead.
 eventlet.monkey_patch()
 
-CONF = zun.conf.CONF
+CONF = cfg.CONF
 
 
 class Service(service.Service):
@@ -38,7 +37,7 @@ class Service(service.Service):
     def __init__(self, topic, server, handlers, binary):
         super(Service, self).__init__()
         serializer = rpc.RequestContextSerializer(
-            objects_base.ZunObjectSerializer())
+            objects_base.BigbangObjectSerializer())
         transport = messaging.get_transport(CONF)
         # TODO(asalkeld) add support for version='x.y'
         target = messaging.Target(topic=topic, server=server)
@@ -47,7 +46,6 @@ class Service(service.Service):
         self.binary = binary
 
     def start(self):
-        servicegroup.setup(CONF, self.binary, self.tg)
         self._server.start()
 
     def stop(self):

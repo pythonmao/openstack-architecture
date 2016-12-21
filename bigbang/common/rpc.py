@@ -28,12 +28,12 @@ __all__ = [
 
 import oslo_messaging as messaging
 from oslo_serialization import jsonutils
+from oslo_config import cfg
 
-from zun.common import context as zun_context
-from zun.common import exception
-import zun.conf
+from bigbang.common import context as bigbang_context
+from bigbang.common import exception
 
-CONF = zun.conf.CONF
+CONF = cfg.CONF
 TRANSPORT = None
 NOTIFIER = None
 
@@ -101,7 +101,7 @@ class RequestContextSerializer(messaging.Serializer):
         return context.to_dict()
 
     def deserialize_context(self, context):
-        return zun_context.RequestContext.from_dict(context)
+        return bigbang_context.RequestContext.from_dict(context)
 
 
 def get_transport_url(url_str=None):
@@ -127,7 +127,7 @@ def get_server(target, endpoints, serializer=None):
                                     serializer=serializer)
 
 
-def get_notifier(service='container', host=None, publisher_id=None):
+def get_notifier(service, host=None, publisher_id=None):
     assert NOTIFIER is not None
     if not publisher_id:
         publisher_id = "%s.%s" % (service, host or CONF.common.host)

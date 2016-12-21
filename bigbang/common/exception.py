@@ -33,11 +33,11 @@ import six
 
 from bigbang.common.i18n import _
 from bigbang.common.i18n import _LE
-import bigbang.conf
+from oslo_config import cfg
 
 LOG = logging.getLogger(__name__)
 
-CONF = bigbang.conf.CONF
+CONF = cfg.CONF
 
 try:
     CONF.import_opt('fatal_exception_format_errors',

@@ -9,7 +9,7 @@ from bigbang.api import config as api_config
 CONF = cfg.CONF
 LOG = logging.getLogger('bigbang.api')
 
-
+#Should use common/service.py to complete
 def main():
     api_config.init(sys.argv[1:])
     api_config.setup_logging()
