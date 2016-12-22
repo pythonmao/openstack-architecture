@@ -11,3 +11,4 @@ class API(rpc_service.API):
     def get_all_person(self):
         LOG.info('send to MQ')
         return self._call('get_all_person')
+        # return self._cast('get_all_person')

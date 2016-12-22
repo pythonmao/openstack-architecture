@@ -21,6 +21,7 @@ def init(args, **kwargs):
     cfg.CONF.register_opts(api_opts, group=api_config_group)
     logging.register_options(cfg.CONF)
 
+    rpc.set_defaults(control_exchange='bigbang')
     cfg.CONF(args=args, project='bigbang', **kwargs)
     rpc.init(cfg.CONF)
 

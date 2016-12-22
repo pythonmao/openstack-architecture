@@ -12,4 +12,5 @@ class PersonController(object):
         context = pecan.request.context
         persons = pecan.request.rpcapi.get_all_person()
         LOG.info('need add person')
-        return {'message': 'Need add person'}
+        return persons
+        # return {'message': 'Need add person'}
