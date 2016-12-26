@@ -28,7 +28,6 @@ from paste import deploy
 from bigbang import version
 from bigbang.common.i18n import _
 
-
 LOG = logging.getLogger(__name__)
 
 core_opts = [
@@ -74,6 +73,7 @@ cfg.CONF.register_cli_opts(core_cli_opts)
 def config_opts():
     return [(None, core_opts), (None, core_cli_opts)]
 
+
 # Ensure that the control exchange is set correctly
 oslo_messaging.set_transport_defaults(control_exchange='tacker')
 
@@ -86,6 +86,7 @@ def set_db_defaults():
         connection='sqlite://',
         max_pool_size=10,
         max_overflow=20, pool_timeout=10)
+
 
 set_db_defaults()
 

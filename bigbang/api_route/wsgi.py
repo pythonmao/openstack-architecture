@@ -80,6 +80,7 @@ CONF.register_opts(socket_opts)
 def config_opts():
     return [(None, socket_opts)]
 
+
 LOG = logging.getLogger(__name__)
 
 
@@ -401,6 +402,7 @@ class JSONDictSerializer(DictSerializer):
     def default(self, data):
         def sanitizer(obj):
             return six.text_type(obj)
+
         return jsonutils.dumps(data, default=sanitizer)
 
 

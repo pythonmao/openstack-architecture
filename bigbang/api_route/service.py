@@ -21,12 +21,8 @@ from oslo_service import service
 from oslo_utils import excutils
 
 from bigbang.api_route import config
-from bigbang import wsgi
-<<<<<<< HEAD
+from bigbang.api_route import wsgi
 from bigbang.common.i18n import _
-=======
->>>>>>> 3f444d4e2f847f36e256509d8b3faa7d5dd10b0a
-
 
 service_opts = [
     cfg.IntOpt('periodic_interval',
@@ -79,20 +75,11 @@ class WsgiService(service.ServiceBase):
         pass
 
 
-<<<<<<< HEAD
 class BigbangApiService(WsgiService):
     """Class for tacker-api service."""
 
     @classmethod
     def create(cls, app_name='bigbang'):
-=======
-class TackerApiService(WsgiService):
-    """Class for tacker-api service."""
-
-    @classmethod
-    def create(cls, app_name='tacker'):
->>>>>>> 3f444d4e2f847f36e256509d8b3faa7d5dd10b0a
-
         # Setup logging early
         config.setup_logging(cfg.CONF)
         # Dump the initial option values
@@ -102,7 +89,6 @@ class TackerApiService(WsgiService):
 
 
 def serve_wsgi(cls):
-
     try:
         service = cls.create()
     except Exception:
@@ -118,20 +104,12 @@ def _run_wsgi(app_name):
     if not app:
         LOG.error(_('No known API applications configured.'))
         return
-<<<<<<< HEAD
     server = wsgi.Server("bigbang")
-=======
-    server = wsgi.Server("Tacker")
->>>>>>> 3f444d4e2f847f36e256509d8b3faa7d5dd10b0a
     server.start(app, cfg.CONF.bind_port, cfg.CONF.bind_host,
                  workers=cfg.CONF.api_workers)
     # Dump all option values here after all options are parsed
     cfg.CONF.log_opt_values(LOG, std_logging.DEBUG)
-<<<<<<< HEAD
     LOG.info(_("bigbang service started, listening on %(host)s:%(port)s"),
-=======
-    LOG.info(_("Tacker service started, listening on %(host)s:%(port)s"),
->>>>>>> 3f444d4e2f847f36e256509d8b3faa7d5dd10b0a
              {'host': cfg.CONF.bind_host,
               'port': cfg.CONF.bind_port})
     return server
