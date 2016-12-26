@@ -18,7 +18,7 @@ def main():
                    " the '--config-file' option!"))
 
     try:
-        api_route = service.serve_wsgi(service.TackerApiService)
+        api_route = service.serve_wsgi(service.BigbangApiService)
         launcher = common_service.launch(cfg.CONF, api_route,
                                          workers=cfg.CONF.api_workers or None)
         launcher.wait()

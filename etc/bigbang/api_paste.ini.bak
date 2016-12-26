@@ -6,13 +6,25 @@ use = egg:Paste#urlmap
 [composite:bigbangapi_v1_0]
 use = call:tacker.auth:pipeline_factory
 noauth = request_id catch_errors extensions tackerapiapp_v1_0
-keystone = request_id catch_errors bigbangapiapp_v1_0
+keystone = request_id catch_errors alarm_receiver authtoken keystonecontext extension bigbangapiapp_v1_0
 
 [filter:request_id]
 paste.filter_factory = oslo_middleware:RequestId.factory
 
 [filter:catch_errors]
 paste.filter_factory = oslo_middleware:CatchErrors.factory
+
+[filter:alarm_receiver]
+paste.filter_factory = tacker.alarm_receiver:AlarmReceiver.factory
+
+[filter:keystonecontext]
+paste.filter_factory = bigbang.api_route.auth:TackerKeystoneContext.factory
+
+[filter:authtoken]
+paste.filter_factory = keystonemiddleware.auth_token:filter_factory
+
+[filter:extensions]
+paste.filter_factory = tacker.api.extensions:extension_middleware_factory
 
 [app:bigbangversions]
 paste.app_factory = bigbang.api_route.versions:Versions.factory
