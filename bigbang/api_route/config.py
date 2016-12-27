@@ -98,7 +98,7 @@ def init(args, **kwargs):
 
     # FIXME(ihrachys): if import is put in global, circular import
     # failure occurs
-    from tacker.common import rpc as n_rpc
+    from bigbang.common import rpc as n_rpc
     n_rpc.init(cfg.CONF)
 
 

@@ -19,7 +19,7 @@ import webob.dec
 import webob.exc
 
 from bigbang.common import context
-from bigbang import wsgi
+from bigbang.api_route import wsgi
 
 LOG = logging.getLogger(__name__)
 

@@ -39,9 +39,9 @@ import six
 import webob.dec
 import webob.exc
 
-from bigbang.common import exceptions as exception
-from bigbang.context import context
-from bigbang.db import api
+from bigbang.common import exception
+from bigbang.common import context
+# from bigbang.db import api
 from bigbang.common.i18n import _
 
 socket_opts = [
@@ -96,7 +96,7 @@ class WorkerService(common_service.ServiceBase):
         # We may have just forked from parent process.  A quick disposal of the
         # existing sql connections avoids producting 500 errors later when they
         # are discovered to be broken.
-        api.get_engine().pool.dispose()
+        # api.get_engine().pool.dispose()
         self._server = self._service.pool.spawn(self._service._run,
                                                 self._application,
                                                 self._service._socket)

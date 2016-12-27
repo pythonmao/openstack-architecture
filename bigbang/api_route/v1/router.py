@@ -20,9 +20,10 @@ import webob
 import webob.dec
 import webob.exc
 
-from bigbang.api_route import extensions
-from bigbang.api_route.v1 import attributes
+# from bigbang.api_route import extensions
+# from bigbang.api_route.v1 import attributes
 from bigbang.api_route import wsgi
+from bigbang.controller import manager
 
 
 class Index(wsgi.Application):
@@ -56,6 +57,11 @@ class APIRouter(wsgi.Router):
 
     def __init__(self, **local_config):
         mapper = routes_mapper.Mapper()
-        ext_mgr = extensions.ExtensionManager.get_instance()
-        ext_mgr.extend_resources("1.0", attributes.RESOURCE_ATTRIBUTE_MAP)
+        test_manager = manager.create_resource()
+        mapper.connect("/person",
+                       controller=test_manager,
+                       action="get_all_person")
+
+        # ext_mgr = extensions.ExtensionManager.get_instance()
+        # ext_mgr.extend_resources("1.0", attributes.RESOURCE_ATTRIBUTE_MAP)
         super(APIRouter, self).__init__(mapper)

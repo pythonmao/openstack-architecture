@@ -19,6 +19,7 @@ import oslo_i18n
 
 from bigbang.api_route.views import versions as versions_view
 from bigbang.api_route import wsgi
+from bigbang.common.i18n import _
 
 
 class Versions(object):
