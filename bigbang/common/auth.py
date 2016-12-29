@@ -108,6 +108,7 @@ class KeystoneStrategy(BaseStrategy):
            case, we rewrite the url to contain /v2.0/ and retry using the v2
            protocol.
         """
+
         def _authenticate(auth_url):
             # If OS_AUTH_URL is missing a trailing slash add one
             if not auth_url.endswith('/'):

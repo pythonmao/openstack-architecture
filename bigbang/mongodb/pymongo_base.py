@@ -23,11 +23,9 @@ from ceilometer import utils
 
 LOG = log.getLogger(__name__)
 
-
 COMMON_AVAILABLE_CAPABILITIES = {
     'events': {'query': {'simple': True}},
 }
-
 
 AVAILABLE_STORAGE_CAPABILITIES = {
     'storage': {'production_ready': True},
@@ -136,9 +134,9 @@ class Connection(base.Connection):
             # We choose events that simultaneously have event_type and certain
             # trait_name, and retrieve events contains only mentioned traits.
             events = self.db.event.find({'$and': [{'event_type': event_type},
-                                        {'traits.trait_name': trait_name}]},
+                                                  {'traits.trait_name': trait_name}]},
                                         {'traits': {'$elemMatch':
-                                                    {'trait_name': trait_name}}
+                                                        {'trait_name': trait_name}}
                                          })
         for event in events:
             for trait in event['traits']:

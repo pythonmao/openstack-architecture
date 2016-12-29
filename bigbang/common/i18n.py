@@ -18,7 +18,6 @@
 
 import oslo_i18n
 
-
 _translators = oslo_i18n.TranslatorFactory(domain='zun')
 
 # The primary translation function using the well-known name "_"

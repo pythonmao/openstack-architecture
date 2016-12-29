@@ -115,4 +115,5 @@ def filter_factory(global_conf, **local_conf):
 
     def auth_filter(app):
         return KeystonePasswordAuthProtocol(app, conf)
+
     return auth_filter

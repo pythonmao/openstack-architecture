@@ -5,6 +5,7 @@ from oslo_log import log as logging
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
 
+
 class BookController(object):
     @expose('json')
     def index(self):

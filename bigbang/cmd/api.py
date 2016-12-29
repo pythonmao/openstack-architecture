@@ -1,15 +1,16 @@
-import sys
 from oslo_config import cfg
 from oslo_log import log as logging
-
 from oslo_service import wsgi
+import sys
+
 from bigbang.api import app
 from bigbang.api import config as api_config
 
 CONF = cfg.CONF
 LOG = logging.getLogger('bigbang.api')
 
-#Should use common/service.py to complete
+
+# Should use common/service.py to complete
 def main():
     api_config.init(sys.argv[1:])
     api_config.setup_logging()

@@ -1,6 +1,7 @@
-import sys
 from oslo_config import cfg
 from oslo_log import log as logging
+import sys
+
 from bigbang.common import rpc
 
 LOG = logging.getLogger(__name__)

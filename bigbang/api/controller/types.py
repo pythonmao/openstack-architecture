@@ -6,7 +6,7 @@ import six
 from oslo_utils import strutils
 from oslo_utils import uuidutils
 
-from bigbang.common import exception
+from bigbang.common import exceptions
 from bigbang.common.i18n import _
 from bigbang.common.i18n import _LE
 
@@ -84,6 +84,7 @@ class NameType(String):
 
 class ImageNameType(NameType):
     type_name = 'ImageNameType'
+
     # ImageNameType allows to be Non-None or a string matches pattern
     # `[a-zA-Z0-9][a-zA-Z0-9_.-].` with minimum length is 2 and maximum length
     # 255 string type.
@@ -281,7 +282,7 @@ class MemoryType(object):
         elif value.isdigit() and int(value) >= MIN_MEMORY_SIZE:
             return value
         elif (value.isalnum() and
-              value[:-1].isdigit() and value[-1] in VALID_UNITS.keys()):
+                  value[:-1].isdigit() and value[-1] in VALID_UNITS.keys()):
             if int(value[:-1]) * VALID_UNITS[value[-1]] >= MIN_MEMORY_SIZE:
                 return value
         LOG.exception(_LE('Failed to validate container memory value'))
@@ -303,7 +304,7 @@ class ImageSize(object):
         elif value.isdigit():
             return value
         elif (value.isalnum() and
-              value[:-1].isdigit() and value[-1] in VALID_UNITS.keys()):
+                  value[:-1].isdigit() and value[-1] in VALID_UNITS.keys()):
             return int(value[:-1]) * VALID_UNITS[value[-1]]
         else:
             LOG.exception(_LE('Failed to validate image size'))
@@ -325,8 +326,8 @@ class EnumType(object):
         if value.lower() not in set(values):
             message = _(
                 "%(name)s should be one of: %(values)s") % {
-                    'name': name,
-                    'values': ', '.join(map(six.text_type, values))}
+                          'name': name,
+                          'values': ', '.join(map(six.text_type, values))}
             raise exception.InvalidValue(message)
         else:
             return value.lower()

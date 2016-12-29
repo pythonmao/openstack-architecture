@@ -59,6 +59,7 @@ def wrap_exception(notifier=None, event_type=None):
     It logs the exception as well as optionally sending
     it to the notification system.
     """
+
     def inner(f):
         def wrapped(self, context, *args, **kw):
             # Don't store self or context in the payload, it now seems to
@@ -84,6 +85,7 @@ def wrap_exception(notifier=None, event_type=None):
                         notifier.error(context, temp_type, payload)
 
         return functools.wraps(f)(wrapped)
+
     return inner
 
 
@@ -103,6 +105,7 @@ def wrap_controller_exception(func, func_server_error, func_client_error):
     4xx and logs the excp in debug mode
 
     """
+
     @functools.wraps(func)
     def wrapped(*args, **kw):
         try:
@@ -126,11 +129,13 @@ def wrap_controller_exception(func, func_server_error, func_client_error):
                 # raise a client error the original message
                 LOG.debug(excp)
                 return func_client_error(excp, http_error_code)
+
     return wrapped
 
 
 def wrap_pecan_controller_exception(func):
     """This decorator wraps pecan controllers to handle exceptions."""
+
     def _func_server_error(log_correlation_id, status_code):
         pecan.response.status = status_code
         return {
@@ -154,6 +159,7 @@ def wrap_pecan_controller_exception(func):
 
 def wrap_keystone_exception(func):
     """Wrap keystone exceptions and throw bigbang specific exceptions."""
+
     @functools.wraps(func)
     def wrapped(*args, **kw):
         try:
@@ -166,6 +172,7 @@ def wrap_keystone_exception(func):
                 client=func.__name__,
                 message="unexpected keystone client error occurred: %s"
                         % sys.exc_info()[1])
+
     return wrapped
 
 

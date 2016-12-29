@@ -1,8 +1,8 @@
-import sys
 import eventlet
 eventlet.monkey_patch()
 from oslo_config import cfg
 from oslo_service import service as common_service
+import sys
 
 from bigbang.api_route import config
 from bigbang.api_route import service

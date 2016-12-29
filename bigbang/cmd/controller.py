@@ -1,12 +1,12 @@
-import sys
 import os
 from oslo_config import cfg
 from oslo_log import log as logging
 from oslo_service import service
+import sys
 
 from bigbang.common import service as bigbang_service
-from bigbang.common import short_id
 from bigbang.common import rpc_service
+from bigbang.common import short_id
 from bigbang.controller import manager
 
 CONF = cfg.CONF

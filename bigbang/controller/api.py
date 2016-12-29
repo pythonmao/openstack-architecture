@@ -3,6 +3,7 @@ from bigbang.common import rpc_service
 
 LOG = logging.getLogger(__name__)
 
+
 class API(rpc_service.API):
     def __init__(self, transport=None, context=None, topic=None):
         super(API, self).__init__(

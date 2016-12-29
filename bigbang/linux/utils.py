@@ -27,7 +27,6 @@ from oslo_utils import excutils
 
 from tacker.common import utils
 
-
 LOG = logging.getLogger(__name__)
 
 

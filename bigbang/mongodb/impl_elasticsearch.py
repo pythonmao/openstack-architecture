@@ -29,11 +29,9 @@ from ceilometer import utils
 
 LOG = log.getLogger(__name__)
 
-
 AVAILABLE_CAPABILITIES = {
     'events': {'query': {'simple': True}},
 }
-
 
 AVAILABLE_STORAGE_CAPABILITIES = {
     'storage': {'production_ready': True},
@@ -80,9 +78,9 @@ class Connection(base.Connection):
         ts_template = {
             'template': '*',
             'mappings': {'_default_':
-                         {'_timestamp': {'enabled': True,
-                                         'store': True},
-                          'properties': {'traits': {'type': 'nested'}}}}}
+                             {'_timestamp': {'enabled': True,
+                                             'store': True},
+                              'properties': {'traits': {'type': 'nested'}}}}}
         iclient.put_template(name='enable_timestamp', body=ts_template)
 
     def record_events(self, events):
@@ -124,17 +122,17 @@ class Connection(base.Connection):
 
         if ev_filter.start_timestamp:
             filters.append({'range': {'timestamp':
-                           {'ge': ev_filter.start_timestamp.isoformat()}}})
+                                          {'ge': ev_filter.start_timestamp.isoformat()}}})
             while indices[0] < (
-                '%s_%s' % (self.index_name,
-                           ev_filter.start_timestamp.date().isoformat())):
+                        '%s_%s' % (self.index_name,
+                                   ev_filter.start_timestamp.date().isoformat())):
                 del indices[0]
         if ev_filter.end_timestamp:
             filters.append({'range': {'timestamp':
-                           {'le': ev_filter.end_timestamp.isoformat()}}})
+                                          {'le': ev_filter.end_timestamp.isoformat()}}})
             while indices[-1] > (
-                '%s_%s' % (self.index_name,
-                           ev_filter.end_timestamp.date().isoformat())):
+                        '%s_%s' % (self.index_name,
+                                   ev_filter.end_timestamp.date().isoformat())):
                 del indices[-1]
         q_args['index'] = indices
 
@@ -175,7 +173,7 @@ class Connection(base.Connection):
                                         'should': or_cond}}}}}})
 
         q_args['body'] = {'query': {'filtered':
-                                    {'filter': {'bool': {'must': filters}}}}}
+                                        {'filter': {'bool': {'must': filters}}}}}
         return q_args
 
     def get_events(self, event_filter, limit=None):

@@ -23,7 +23,6 @@ from bigbang.common.i18n import _
 
 
 class Versions(object):
-
     @classmethod
     def factory(cls, global_config, **local_config):
         return cls()

@@ -41,7 +41,7 @@ def get_memcached_client(expiration_time=0):
     if CONF.cache.enabled and CONF.cache.memcache_servers:
         _warn_if_null_backend()
         return CacheClient(
-                _get_default_cache_region(expiration_time=expiration_time))
+            _get_default_cache_region(expiration_time=expiration_time))
 
 
 def get_client(expiration_time=0):
@@ -51,11 +51,11 @@ def get_client(expiration_time=0):
     if CONF.cache.enabled:
         _warn_if_null_backend()
         return CacheClient(
-                _get_default_cache_region(expiration_time=expiration_time))
+            _get_default_cache_region(expiration_time=expiration_time))
     # If [cache]/enabled flag is off, we use the dictionary backend
     return CacheClient(
-            _get_custom_cache_region(expiration_time=expiration_time,
-                                     backend='oslo_cache.dict'))
+        _get_custom_cache_region(expiration_time=expiration_time,
+                                 backend='oslo_cache.dict'))
 
 
 def _get_default_cache_region(expiration_time):

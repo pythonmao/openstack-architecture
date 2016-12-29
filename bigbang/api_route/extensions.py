@@ -31,13 +31,11 @@ from bigbang.api_route import policy
 from bigbang.api_route import wsgi
 from bigbang.common.i18n import _
 
-
 LOG = logging.getLogger(__name__)
 
 
 @six.add_metaclass(abc.ABCMeta)
 class PluginInterface(object):
-
     @classmethod
     def __subclasshook__(cls, klass):
         """Checking plugin class.
@@ -186,7 +184,6 @@ class ExtensionDescriptor(object):
 
 
 class ActionExtensionController(wsgi.Controller):
-
     def __init__(self, application):
         self.application = application
         self.action_handlers = {}
@@ -206,7 +203,6 @@ class ActionExtensionController(wsgi.Controller):
 
 
 class RequestExtensionController(wsgi.Controller):
-
     def __init__(self, application):
         self.application = application
         self.handlers = []
@@ -223,7 +219,6 @@ class RequestExtensionController(wsgi.Controller):
 
 
 class ExtensionController(wsgi.Controller):
-
     def __init__(self, extension_manager):
         self.extension_manager = extension_manager
 
@@ -319,8 +314,10 @@ class ExtensionMiddleware(wsgi.Middleware):
     @classmethod
     def factory(cls, global_config, **local_config):
         """Paste factory."""
+
         def _factory(app):
             return cls(app, global_config, **local_config)
+
         return _factory
 
     def _action_ext_controllers(self, application, ext_mgr, mapper):
@@ -384,9 +381,11 @@ class ExtensionMiddleware(wsgi.Middleware):
 
 def extension_middleware_factory(global_config, **local_config):
     """Paste factory."""
+
     def _factory(app):
         ext_mgr = ExtensionManager.get_instance()
         return ExtensionMiddleware(app, ext_mgr=ext_mgr)
+
     return _factory
 
 
@@ -513,7 +512,7 @@ class ExtensionManager(object):
             LOG.debug(_('Ext updated: %s'), extension.get_updated())
         except AttributeError as ex:
             LOG.exception(_("Exception loading extension: %s"),
-                six.text_type(ex))
+                          six.text_type(ex))
             return False
         return True
 

@@ -33,7 +33,6 @@ CONF = cfg.CONF
 
 
 class Service(service.Service):
-
     def __init__(self, topic, server, handlers, binary):
         super(Service, self).__init__()
         serializer = rpc.RequestContextSerializer(

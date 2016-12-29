@@ -74,6 +74,7 @@ class NoExceptionTracebackHook(hooks.PecanHook):
     message which is then sent to the client. Such behavior is a security
     concern so this hook is aimed to cut-off traceback from the error message.
     """
+
     # NOTE(max_lobur): 'after' hook used instead of 'on_error' because
     # 'on_error' never fired for wsme+pecan pair. wsme @wsexpose decorator
     # catches and handles all the errors, so 'on_error' dedicated for unhandled

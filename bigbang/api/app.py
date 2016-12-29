@@ -1,7 +1,8 @@
-from oslo_service import service
 from oslo_config import cfg
+from oslo_service import service
 from pecan import configuration
 from pecan import make_app
+
 from bigbang.api import hooks
 
 _launcher = None

@@ -32,16 +32,13 @@ from ceilometer import utils
 
 LOG = log.getLogger(__name__)
 
-
 AVAILABLE_CAPABILITIES = {
     'events': {'query': {'simple': True}},
 }
 
-
 AVAILABLE_STORAGE_CAPABILITIES = {
     'storage': {'production_ready': True},
 }
-
 
 TRAIT_MAPLIST = [(api_models.Trait.NONE_TYPE, models.TraitText),
                  (api_models.Trait.TEXT_TYPE, models.TraitText),
@@ -49,10 +46,8 @@ TRAIT_MAPLIST = [(api_models.Trait.NONE_TYPE, models.TraitText),
                  (api_models.Trait.FLOAT_TYPE, models.TraitFloat),
                  (api_models.Trait.DATETIME_TYPE, models.TraitDatetime)]
 
-
 TRAIT_ID_TO_MODEL = dict((x, y) for x, y in TRAIT_MAPLIST)
 TRAIT_MODEL_TO_ID = dict((y, x) for x, y in TRAIT_MAPLIST)
-
 
 trait_models_dict = {'string': models.TraitText,
                      'integer': models.TraitInt,
@@ -300,8 +295,8 @@ class Connection(base.Connection):
             # get a list of all events that match filters
             for (id_, generated, message_id,
                  desc, raw) in query.add_columns(
-                     models.Event.generated, models.Event.message_id,
-                     models.EventType.desc, models.Event.raw).all():
+                models.Event.generated, models.Event.message_id,
+                models.EventType.desc, models.Event.raw).all():
                 event_list[id_] = api_models.Event(message_id, desc,
                                                    generated, [], raw)
             # Query all traits related to events.
@@ -314,26 +309,26 @@ class Connection(base.Connection):
                     sa.cast(sa.null(), sa.Integer),
                     sa.cast(sa.null(), sa.Float(53)),
                     sa.cast(sa.null(), sa.String(255)))
-                .filter(sa.exists().where(
+                    .filter(sa.exists().where(
                     models.TraitDatetime.event_id == query.subquery().c.id))
             ).union_all(
                 session.query(
                     models.TraitInt.event_id,
                     models.TraitInt.key, sa.null(),
                     models.TraitInt.value, sa.null(), sa.null())
-                .filter(sa.exists().where(
+                    .filter(sa.exists().where(
                     models.TraitInt.event_id == query.subquery().c.id)),
                 session.query(
                     models.TraitFloat.event_id,
                     models.TraitFloat.key, sa.null(), sa.null(),
                     models.TraitFloat.value, sa.null())
-                .filter(sa.exists().where(
+                    .filter(sa.exists().where(
                     models.TraitFloat.event_id == query.subquery().c.id)),
                 session.query(
                     models.TraitText.event_id,
                     models.TraitText.key, sa.null(), sa.null(), sa.null(),
                     models.TraitText.value)
-                .filter(sa.exists().where(
+                    .filter(sa.exists().where(
                     models.TraitText.event_id == query.subquery().c.id)))
 
             for id_, key, t_date, t_int, t_float, t_text in (

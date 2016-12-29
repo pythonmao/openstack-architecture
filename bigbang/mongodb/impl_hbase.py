@@ -24,11 +24,9 @@ from ceilometer import utils
 
 LOG = log.getLogger(__name__)
 
-
 AVAILABLE_CAPABILITIES = {
     'events': {'query': {'simple': True}},
 }
-
 
 AVAILABLE_STORAGE_CAPABILITIES = {
     'storage': {'production_ready': True},

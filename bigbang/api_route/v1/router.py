@@ -50,7 +50,6 @@ class Index(wsgi.Application):
 
 
 class APIRouter(wsgi.Router):
-
     @classmethod
     def factory(cls, global_config, **local_config):
         return cls(**local_config)
